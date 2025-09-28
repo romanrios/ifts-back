@@ -1,0 +1,15 @@
+extends layout
+
+block contenido
+  h2 Lista de Eventos
+  if eventos.length
+    ul
+      each evento in eventos
+        li
+          strong= evento.titulo
+          |  - 
+          span= evento.fecha
+          form(method="POST", action=`/eliminar/${evento.id}?_method=DELETE`)
+            button(type="submit") Eliminar
+  else
+    p No hay eventos registrados.
