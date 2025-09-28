@@ -1,0 +1,18 @@
+extends layout
+
+block contenido
+  h2 Lista de Eventos
+  if eventos.length
+    ul
+      each evento in eventos
+        li
+          strong= evento.titulo
+          |  - 
+          // Mostramos la fecha en formato local "es-AR"
+          span= new Date(evento.fecha).toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' })
+          
+          // Formulario para eliminar el evento
+          form(method="POST", action=`/eliminar/${evento._id}?_method=DELETE`)
+            button(type="submit") 🗑️ Eliminar
+  else
+    p No hay eventos registrados.
